@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "599176744607",
+    "firebase_url": "https://fazz-36fa5.firebaseio.com",
+    "project_id": "fazz-36fa5",
+    "storage_bucket": "fazz-36fa5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599176744607:android:52ebfe53b76de196",
+        "android_client_info": {
+          "package_name": "com.example.fazz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599176744607-9cracoj7c84l44cpa7qh61smb6s0efc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fazz",
+            "certificate_hash": "c9031165b50b876c1e92e8b845aa7bba44bb2d91"
+          }
+        },
+        {
+          "client_id": "599176744607-ig9gkdsfp7iadfcsmtdk2qmnst2e307c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1a2EV_CEKWiJ-TVnP5ubumOGx-YEa280"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599176744607-ig9gkdsfp7iadfcsmtdk2qmnst2e307c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
