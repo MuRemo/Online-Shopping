@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class AdminCategoryActivity extends AppCompatActivity {
-
+	
+	//define
     private ImageView tShirts, sportsTShirts, femaleDresses, sweathers;
     private ImageView glasses, hatsCaps, walletsBagsPurses, shoes;
     private ImageView headPhonesHandFree, Laptops, watches, mobilePhones;
@@ -33,7 +34,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         Laptops = (ImageView) findViewById(R.id.laptop_pc);
         watches = (ImageView) findViewById(R.id.watches);
         mobilePhones = (ImageView) findViewById(R.id.mobilephones);
-
+	
 
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
