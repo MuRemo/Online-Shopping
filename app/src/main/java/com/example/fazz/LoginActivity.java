@@ -49,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
 
-       // chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
-       // Paper.init(this);
+        chkBoxRememberMe = (CheckBox) findViewById(R.id.remember_me_chkb);
+        Paper.init(this);
 
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
@@ -117,11 +117,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void AllowAccessToAccount(final String phone, final String password) {
 
-       // if(chkBoxRememberMe.isChecked()){
+       if(chkBoxRememberMe.isChecked()){
 
-        //    Paper.book().write(Prevalent.UserPhoneKey, phone);
-        //    Paper.book().write(Prevalent.UserPasswordKey, password);
-        //}
+            Paper.book().write(Prevalent.UserPhoneKey, phone);
+            Paper.book().write(Prevalent.UserPasswordKey, password);
+        }
 
 
         final DatabaseReference RootRef;
@@ -154,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                                loadingBar.dismiss();
 
                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                               //Prevalent.currentOnlineUser = usersData;
+                               Prevalent.currentOnlineUser = usersData;
                                startActivity(intent);
                            }
 

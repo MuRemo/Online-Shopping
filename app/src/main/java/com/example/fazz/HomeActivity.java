@@ -80,11 +80,12 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //View headerView = navigationView.getHeaderView(0);
-      //  TextView userNameTextView = headerView.findViewById(R.id.user_profile_image);
-      //  CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
+        View headerView = navigationView.getHeaderView(0);
+        TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
+        CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-      //  userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
 
 
@@ -177,12 +178,12 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
 
-
+            Intent intent = new Intent(HomeActivity.this, SettinsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
 
             Paper.book().destroy();
-
             Intent intent= new Intent(HomeActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
