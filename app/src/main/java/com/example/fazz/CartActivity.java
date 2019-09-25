@@ -77,6 +77,7 @@ public class CartActivity extends AppCompatActivity {
             }
         };
 
+
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
