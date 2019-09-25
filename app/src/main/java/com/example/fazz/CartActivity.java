@@ -74,6 +74,8 @@ public class CartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        CheckOrderState();
+
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
