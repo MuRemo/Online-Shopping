@@ -3,13 +3,13 @@ package com.example.fazz;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.fazz.Admin.AdminMaintainProductsActivity;
 import com.example.fazz.Model.Products;
 import com.example.fazz.Prevalent.Prevalent;
 import com.example.fazz.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.LayoutInflater;
 import android.view.View;

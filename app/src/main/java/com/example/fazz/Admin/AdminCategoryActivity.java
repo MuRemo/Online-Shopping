@@ -1,4 +1,4 @@
-package com.example.fazz;
+package com.example.fazz.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.fazz.HomeActivity;
+import com.example.fazz.MainActivity;
+import com.example.fazz.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 	
