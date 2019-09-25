@@ -26,7 +26,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="your Name"
+        android:hint="Name"
         />
 
     <EditText
@@ -38,7 +38,7 @@
         android:layout_marginLeft="20dp"
         android:inputType="number"
         android:layout_marginRight="20dp"
-        android:hint="your Phone Number"
+        android:hint="Phone Number"
         />
 
     <EditText
@@ -49,7 +49,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="your Home Address"
+        android:hint="Home Address"
         />
 
     <EditText
@@ -60,7 +60,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="your City Name"
+        android:hint="City Name"
         />
 
 
