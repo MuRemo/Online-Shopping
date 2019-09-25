@@ -29,35 +29,40 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CartActivity extends AppCompatActivity {
-
+public class CartActivity extends AppCompatActivity
+{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
+
     private Button NextProcessBtn;
     private TextView txtTotalAmount, txtMsg1;
 
     private int overTotalPrice = 0;
 
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
 
         recyclerView = findViewById(R.id.cart_list);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        NextProcessBtn = (Button) findViewById(R.id.next_process_btn);
+        NextProcessBtn = (Button) findViewById(R.id.next_btn);
         txtTotalAmount = (TextView) findViewById(R.id.total_price);
         txtMsg1 = (TextView) findViewById(R.id.msg1);
+
 
         NextProcessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                txtTotalAmount.setText("Total Price = Rs." + String.valueOf(overTotalPrice));
+                txtTotalAmount.setText("Total Price = $" + String.valueOf(overTotalPrice));
 
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
@@ -65,13 +70,12 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
     }
 
+
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
 
         CheckOrderState();
@@ -80,18 +84,19 @@ public class CartActivity extends AppCompatActivity {
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
         FirebaseRecyclerOptions<Cart> options =
-                new FirebaseRecyclerOptions.Builder<Cart>().
-                        setQuery(cartListRef.child("User View")
+                new FirebaseRecyclerOptions.Builder<Cart>()
+                        .setQuery(cartListRef.child("User View")
                                 .child(Prevalent.currentOnlineUser.getPhone())
-                                .child("Products"),Cart.class)
+                                .child("Products"), Cart.class)
                         .build();
 
-        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
+        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
+                = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
-
+            protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model)
+            {
                 holder.txtProductQuantity.setText("Quantity = " + model.getQuantity());
-                holder.txtProductPrice.setText("Price = Rs " + model.getPrice());
+                holder.txtProductPrice.setText("Price " + model.getPrice() + "$");
                 holder.txtProductName.setText(model.getPname());
 
                 int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
@@ -99,7 +104,8 @@ public class CartActivity extends AppCompatActivity {
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view)
+                    {
                         CharSequence options[] = new CharSequence[]
                                 {
                                         "Edit",
@@ -144,23 +150,23 @@ public class CartActivity extends AppCompatActivity {
                         builder.show();
                     }
                 });
-
             }
 
             @NonNull
             @Override
-            public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+            public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+            {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items_layout, parent, false);
                 CartViewHolder holder = new CartViewHolder(view);
                 return holder;
             }
         };
 
-
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
+
+
 
     private void CheckOrderState()
     {
@@ -206,7 +212,4 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }
