@@ -22,15 +22,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AdminNewOrdersActivity extends AppCompatActivity
-{
+public class AdminNewOrdersActivity extends AppCompatActivity {
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_new_orders);
 
@@ -44,8 +42,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
 
@@ -57,8 +54,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter =
                 new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model)
-                    {
+                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
                         holder.userName.setText("Name: " + model.getName());
                         holder.userPhoneNumber.setText("Phone: " + model.getPhone());
                         holder.userTotalPrice.setText("Total Amount =  $" + model.getTotalAmount());
@@ -67,8 +63,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
                         holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View view)
-                            {
+                            public void onClick(View view) {
                                 String uID = getRef(position).getKey();
 
                                 Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductsActivity.class);
@@ -79,8 +74,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View view)
-                            {
+                            public void onClick(View view) {
                                 CharSequence options[] = new CharSequence[]
                                         {
                                                 "Yes",
@@ -92,16 +86,12 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
                                 builder.setItems(options, new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(DialogInterface dialogInterface, int i)
-                                    {
-                                        if (i == 0)
-                                        {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        if (i == 0) {
                                             String uID = getRef(position).getKey();
 
                                             RemoverOrder(uID);
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             finish();
                                         }
                                     }
@@ -113,8 +103,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
                     @NonNull
                     @Override
-                    public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-                    {
+                    public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
                         return new AdminOrdersViewHolder(view);
                     }
@@ -125,16 +114,12 @@ public class AdminNewOrdersActivity extends AppCompatActivity
     }
 
 
-
-
-    public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder {
         public TextView userName, userPhoneNumber, userTotalPrice, userDateTime, userShippingAddress;
         public Button ShowOrdersBtn;
 
 
-        public AdminOrdersViewHolder(View itemView)
-        {
+        public AdminOrdersViewHolder(View itemView) {
             super(itemView);
 
 
@@ -148,10 +133,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity
     }
 
 
-
-
-    private void RemoverOrder(String uID)
-    {
+    private void RemoverOrder(String uID) {
         ordersRef.child(uID).removeValue();
     }
+
 }

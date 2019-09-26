@@ -12,9 +12,8 @@ import com.example.fazz.HomeActivity;
 import com.example.fazz.MainActivity;
 import com.example.fazz.R;
 
-public class AdminCategoryActivity extends AppCompatActivity {
-	
-	//define
+public class AdminCategoryActivity extends AppCompatActivity
+{
     private ImageView tShirts, sportsTShirts, femaleDresses, sweathers;
     private ImageView glasses, hatsCaps, walletsBagsPurses, shoes;
     private ImageView headPhonesHandFree, Laptops, watches, mobilePhones;
@@ -23,9 +22,11 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
+
 
         LogoutBtn = (Button) findViewById(R.id.admin_logout_btn);
         CheckOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
@@ -64,6 +65,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             }
         });
 
+
         tShirts = (ImageView) findViewById(R.id.t_shirts);
         sportsTShirts = (ImageView) findViewById(R.id.sports_t_shirts);
         femaleDresses = (ImageView) findViewById(R.id.female_dresses);
@@ -78,106 +80,108 @@ public class AdminCategoryActivity extends AppCompatActivity {
         Laptops = (ImageView) findViewById(R.id.laptop_pc);
         watches = (ImageView) findViewById(R.id.watches);
         mobilePhones = (ImageView) findViewById(R.id.mobilephones);
-	
+
 
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","TShirts");
+                intent.putExtra("category", "tShirts");
                 startActivity(intent);
-
             }
         });
+
 
         sportsTShirts.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Sports TShirts");
+                intent.putExtra("category", "Sports tShirts");
                 startActivity(intent);
-
             }
         });
+
 
         femaleDresses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Female Dresses");
+                intent.putExtra("category", "Female Dresses");
                 startActivity(intent);
-
             }
         });
+
 
         sweathers.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Sweathers");
+                intent.putExtra("category", "Sweathers");
                 startActivity(intent);
-
             }
         });
+
 
         glasses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Glasses");
+                intent.putExtra("category", "Glasses");
                 startActivity(intent);
-
             }
         });
+
 
         hatsCaps.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Hats Caps");
+                intent.putExtra("category", "Hats Caps");
                 startActivity(intent);
-
             }
         });
+
+
 
         walletsBagsPurses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Wallets Bags Purses");
+                intent.putExtra("category", "Wallets Bags Purses");
                 startActivity(intent);
-
             }
         });
+
 
         shoes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","Shoes");
+                intent.putExtra("category", "Shoes");
                 startActivity(intent);
-
             }
         });
+
+
 
         headPhonesHandFree.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category","HeadPhones HandsFree");
+                intent.putExtra("category", "HeadPhones HandFree");
                 startActivity(intent);
-
             }
         });
+
 
         Laptops.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,13 +1,11 @@
 package com.example.fazz.Model;
 
-public class Cart {
+public class Cart
+{
+    private String pid, pname, price, quantity, discount;
 
-        private String pid, pname, price, quantity, discount;
-
-        public Cart(){
-
-
-        }
+    public Cart() {
+    }
 
     public Cart(String pid, String pname, String price, String quantity, String discount) {
         this.pid = pid;

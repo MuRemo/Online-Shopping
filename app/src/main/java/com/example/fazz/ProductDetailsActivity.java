@@ -28,9 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class ProductDetailsActivity extends AppCompatActivity {
-
-    //private FloatingActionButton addToCartBtn;
+public class ProductDetailsActivity extends AppCompatActivity
+{
     private Button addToCartButton;
     private ImageView productImage;
     private ElegantNumberButton numberButton;
@@ -38,23 +37,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String productID = "", state = "Normal";
 
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
         productID = getIntent().getStringExtra("pid");
 
-        //addToCartBtn = (FloatingActionButton) findViewById(R.id.add_product_to_cart_btn);
         addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
         productImage = (ImageView) findViewById(R.id.product_image_details);
         productName = (TextView) findViewById(R.id.product_name_details);
-        productPrice = (TextView) findViewById(R.id.product_price_details);
         productDescription = (TextView) findViewById(R.id.product_description_details);
+        productPrice = (TextView) findViewById(R.id.product_price_details);
 
-        getProducDetails(productID);
+
+        getProductDetails(productID);
+
 
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onStart()
     {
@@ -82,17 +81,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         CheckOrderState();
     }
 
-    private void addingToCartList() {
-
+    private void addingToCartList()
+    {
         String saveCurrentTime, saveCurrentDate;
 
         Calendar calForDate = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, YYYY");
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentDate.format(calForDate.getTime());
-
 
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
@@ -105,59 +103,58 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("quantity", numberButton.getNumber());
         cartMap.put("discount", "");
 
-        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
-                .child(productID).updateChildren(cartMap)
+        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
+                .child("Products").child(productID)
+                .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
-                        if(task.isSuccessful()){
-
-                            cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone()).child("Products")
-                                    .child(productID).updateChildren(cartMap)
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone())
+                                    .child("Products").child(productID)
+                                    .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if(task.isSuccessful()){
-
+                                        public void onComplete(@NonNull Task<Void> task)
+                                        {
+                                            if (task.isSuccessful())
+                                            {
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to Cart List.", Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                                 startActivity(intent);
-
                                             }
                                         }
                                     });
-
                         }
                     }
                 });
-
     }
 
-    private void getProducDetails(String productID) {
 
+    private void getProductDetails(String productID)
+    {
         DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()){
-
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.exists())
+                {
                     Products products = dataSnapshot.getValue(Products.class);
 
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(productImage);
-
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

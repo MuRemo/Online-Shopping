@@ -54,7 +54,7 @@ public class CartActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
 
         NextProcessBtn = (Button) findViewById(R.id.next_btn);
-        txtTotalAmount = (TextView) findViewById(R.id.total_price);
+        txtTotalAmount = (TextView) findViewById(R.id.page_title);
         txtMsg1 = (TextView) findViewById(R.id.msg1);
 
 
@@ -96,7 +96,7 @@ public class CartActivity extends AppCompatActivity
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model)
             {
                 holder.txtProductQuantity.setText("Quantity = " + model.getQuantity());
-                holder.txtProductPrice.setText("Price " + model.getPrice() + "$");
+                holder.txtProductPrice.setText("Price " + model.getPrice());
                 holder.txtProductName.setText(model.getPname());
 
                 int oneTyprProductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());

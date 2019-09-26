@@ -40,19 +40,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-
+        implements NavigationView.OnNavigationItemSelectedListener
+{
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
     private String type = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -65,36 +66,37 @@ public class HomeActivity extends AppCompatActivity
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
+
         Paper.init(this);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
 
 
-
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view)
+            {
                 if (!type.equals("Admin"))
                 {
-                    Intent intern = new Intent(HomeActivity.this, CartActivity.class);
-                    startActivity(intern);
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
                 }
-
-
-
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
@@ -108,78 +110,80 @@ public class HomeActivity extends AppCompatActivity
             Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         }
 
+
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
+
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
 
         FirebaseRecyclerOptions<Products> options =
                 new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(ProductsRef, Products.class)
+                        .setQuery(ProductsRef, Products.class)
                         .build();
+
 
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model) {
-
-                holder.txtProductName.setText(model.getPname());
-                holder.txtProductDescription.setText(model.getDescription());
-                holder.txtProductPrice.setText("Price = " + model.getPrice() + "Rs");
-                Picasso.get().load(model.getImage()).into(holder.imageView);
-
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view)
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model)
                     {
-                        if (type.equals("Admin"))
-                        {
-                            Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
-                            intent.putExtra("pid", model.getPid());
-                            startActivity(intent);
-                        }
-                        else
-                        {
-                            Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                            intent.putExtra("pid", model.getPid());
-                            startActivity(intent);
-                        }
+                        holder.txtProductName.setText(model.getPname());
+                        holder.txtProductDescription.setText(model.getDescription());
+                        holder.txtProductPrice.setText("Price = Rs " + model.getPrice());
+                        Picasso.get().load(model.getImage()).into(holder.imageView);
+
+
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view)
+                            {
+                                if (type.equals("Admin"))
+                                {
+                                    Intent intent = new Intent(HomeActivity.this, AdminMaintainProductsActivity.class);
+                                    intent.putExtra("pid", model.getPid());
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("pid", model.getPid());
+                                    startActivity(intent);
+                                }
+                            }
+                        });
                     }
-                });
-            }
 
-            @NonNull
-            @Override
-            public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout, parent, false);
-                ProductViewHolder holder = new ProductViewHolder(view);
-                return holder;
-            }
-        };
-
-         recyclerView.setAdapter(adapter);
-         adapter.startListening();
-
-
-
+                    @NonNull
+                    @Override
+                    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+                    {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_items_layout, parent, false);
+                        ProductViewHolder holder = new ProductViewHolder(view);
+                        return holder;
+                    }
+                };
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -188,76 +192,72 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-
-        //if (id == R.id.action_settings) {
-        //    return true;
-        //}
+//        if (id == R.id.action_settings)
+//        {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_cart) {
-
+        if (id == R.id.nav_cart)
+        {
             if (!type.equals("Admin"))
             {
-                Intent intern = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intern);
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
             }
-
-
-
-        } else if (id == R.id.nav_search) {
-
+        }
+        else if (id == R.id.nav_search)
+        {
             if (!type.equals("Admin"))
             {
-
-                Intent intern = new Intent(HomeActivity.this, SearchProductsActivity.class);
-                startActivity(intern);
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
             }
+        }
+        else if (id == R.id.nav_categories)
+        {
 
-
-
-        } else if (id == R.id.nav_categories) {
-
-        } else if (id == R.id.nav_settings) {
-
+        }
+        else if (id == R.id.nav_settings)
+        {
             if (!type.equals("Admin"))
             {
-
                 Intent intent = new Intent(HomeActivity.this, SettinsActivity.class);
                 startActivity(intent);
-
             }
-
-
-
-        } else if (id == R.id.nav_logout) {
-
+        }
+        else if (id == R.id.nav_logout)
+        {
             if (!type.equals("Admin"))
             {
                 Paper.book().destroy();
-                Intent intent= new Intent(HomeActivity.this, MainActivity.class);
+
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-
             }
-
-
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
